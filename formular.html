@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>China — Formular Contact</title>
+    <style>
+        /* ══════════════════════════════════════════════════════
+           RESET & VARIABLES
+        ══════════════════════════════════════════════════════ */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --red: #c0392b; --gold: #f39c12; --dark-red: #922b21;
+            --text: #333; --bg: #fafafa; --card-bg: #ffffff;
+            --sidebar-bg: #fff8f0; --border: #e8d5b7;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-red: 0 8px 30px rgba(192,57,43,0.2);
+            --radius: 12px; --transition: 0.3s ease;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px;
+        }
+
+        .gradient-title {
+            background: linear-gradient(135deg, var(--red), var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; display: inline-block;
+        }
+
+        /* ── HEADER ── */
+        header {
+            background: linear-gradient(135deg, #8b0000 0%, #c0392b 45%, #f39c12 100%);
+            padding: 52px 0 38px; position: relative; overflow: hidden;
+        }
+        header::before {
+            content: '龙'; position: absolute; right: 6%; top: 50%;
+            transform: translateY(-50%); font-size: 160px; opacity: 0.07; color: white;
+        }
+        header::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+            height: 4px; background: linear-gradient(90deg, var(--gold), var(--red), var(--gold));
+        }
+        .header-content h1 {
+            font-size: 2.8rem; font-weight: 800; letter-spacing: 2px;
+            -webkit-text-fill-color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.4); margin-bottom: 8px;
+        }
+        .header-content p { font-size: 1.1rem; color: rgba(255,255,255,0.9); letter-spacing: 1px; font-style: italic; }
+
+        /* ── NAV ── */
+        nav {
+            background: linear-gradient(90deg, #1a0000, #2d0808, #1a0000);
+            border-bottom: 3px solid var(--gold); position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+        }
+        nav ul { list-style: none; display: flex; flex-wrap: wrap; }
+        nav ul li a {
+            display: block; padding: 16px 26px; text-decoration: none;
+            font-weight: 600; font-size: 0.95rem; transition: var(--transition);
+            position: relative; letter-spacing: 0.5px;
+        }
+        nav ul li a::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; right: 50%;
+            height: 3px; background: var(--gold); transition: var(--transition);
+        }
+        nav ul li a:link    { color: #f0d9b5; }
+        nav ul li a:visited { color: #d4b896; }
+        nav ul li a:hover   { color: var(--gold); background: rgba(243,156,18,0.1); }
+        nav ul li a:hover::after { left: 0; right: 0; }
+        nav ul li a:active  { color: #fff; background: rgba(243,156,18,0.25); }
+        nav ul li a:focus   { outline: 2px solid var(--gold); outline-offset: -2px; }
+
+        /* ── LAYOUT ── */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .page-wrapper {
+            display: grid; grid-template-columns: 210px 1fr;
+            gap: 28px; padding: 32px 0; align-items: start;
+        }
+
+        /* ── TABLE OF CONTENTS ── */
+        .table-of-contents {
+            background: linear-gradient(160deg, #fff8f0, #fff); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 22px; position: sticky; top: 70px;
+            box-shadow: var(--shadow); border-top: 3px solid var(--red);
+        }
+        .table-of-contents h3 {
+            font-size: 0.82rem; text-transform: uppercase; letter-spacing: 1.5px;
+            margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+        }
+        .contents-list { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+        .contents-list li a:link {
+            display: block; padding: 8px 12px; color: #444; text-decoration: none;
+            border-radius: 6px; font-size: 0.88rem; transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+        .contents-list li a:visited { color: #7b3f00; border-left-color: rgba(123,63,0,0.25); }
+        .contents-list li a:hover   { color: var(--red); background: rgba(192,57,43,0.06); border-left-color: var(--red); padding-left: 16px; }
+        .contents-list li a:active  { color: var(--dark-red); background: rgba(192,57,43,0.15); }
+        .contents-list li a:focus   { outline: 2px dashed var(--gold); outline-offset: 2px; }
+
+        /* ── MAIN CONTENT ── */
+        .main-content { display: grid; grid-template-columns: 1fr 285px; gap: 22px; align-items: start; }
+        .content { display: flex; flex-direction: column; gap: 22px; }
+
+        /* ── CARDS ── */
+        .content-card {
+            background: var(--card-bg); border-radius: var(--radius); padding: 28px;
+            box-shadow: var(--shadow); border: 1px solid var(--border);
+            transition: transform var(--transition), box-shadow var(--transition), border-top-color var(--transition);
+            border-top: 3px solid transparent;
+        }
+        .content-card:hover { border-top-color: var(--red); box-shadow: var(--shadow-red); transform: translateY(-3px); }
+        .content-card h2 { font-size: 1.65rem; margin-bottom: 16px; }
+        .content-card h3 { font-size: 1.1rem; margin-bottom: 14px; }
+        .content-card p  { margin-bottom: 12px; color: #555; }
+        .content-card ul, .content-card ol { padding-left: 20px; color: #555; }
+        .content-card li { margin-bottom: 8px; }
+
+        /* ── FANCY TEXT ── */
+        .fancy-text {
+            background: linear-gradient(135deg, #fff8f0, #fef9f0);
+            border-left: 4px solid var(--gold); border-radius: 0 8px 8px 0;
+            padding: 18px 20px; margin-bottom: 16px; font-size: 1.03rem; color: #444; position: relative;
+        }
+        .fancy-text::before {
+            content: '"'; position: absolute; top: -10px; left: 10px;
+            font-size: 60px; color: var(--gold); opacity: 0.25; font-family: Georgia, serif;
+        }
+
+        /* ── SIDEBAR ── */
+        .sidebar { display: flex; flex-direction: column; gap: 18px; }
+        .sidebar-section .content-card { background: var(--sidebar-bg); }
+        .sidebar-section .content-card:hover { border-top-color: var(--gold); box-shadow: 0 8px 30px rgba(243,156,18,0.2); }
+        .sidebar .contents-list li a:link    { color: var(--red); }
+        .sidebar .contents-list li a:visited { color: var(--dark-red); }
+        .sidebar .contents-list li a:hover   { color: #c87f00; border-left-color: var(--gold); background: rgba(243,156,18,0.08); }
+
+        /* ── FOOTER ── */
+        footer {
+            background: linear-gradient(135deg, #1a0000, #2d0808); color: #c9a96e;
+            padding: 32px 0; text-align: center; margin-top: 40px;
+            border-top: 3px solid var(--gold); position: relative;
+        }
+        footer::before {
+            content: '中国'; position: absolute; left: 50%; top: 50%;
+            transform: translate(-50%, -50%); font-size: 80px; opacity: 0.04;
+            color: var(--gold); letter-spacing: 10px;
+        }
+        footer p { margin-bottom: 6px; font-size: 0.88rem; opacity: 0.85; position: relative; }
+        footer p:first-child { font-size: 1rem; font-weight: 600; opacity: 1; }
+
+        /* ══════════════════════════════════════════════════════
+           FORM STYLES
+        ══════════════════════════════════════════════════════ */
+
+        /* Progress bar */
+        .form-progress { margin-bottom: 28px; }
+        .progress-label {
+            display: flex; justify-content: space-between;
+            font-size: 0.82rem; color: #888; margin-bottom: 8px; font-weight: 600;
+        }
+        .progress-track { background: #f0e6d6; border-radius: 20px; height: 8px; overflow: hidden; }
+        .progress-fill {
+            height: 100%; background: linear-gradient(90deg, var(--red), var(--gold));
+            border-radius: 20px; width: 0%; transition: width 0.4s ease;
+        }
+
+        /* Form groups */
+        .form-group { margin-bottom: 22px; position: relative; }
+        .form-group label {
+            display: block; font-weight: 600; color: #444;
+            margin-bottom: 7px; font-size: 0.93rem; letter-spacing: 0.3px;
+        }
+        .form-group label span.required { color: var(--red); margin-left: 3px; }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%; padding: 12px 16px;
+            border: 2px solid var(--border); border-radius: 8px;
+            font-size: 0.95rem; font-family: inherit;
+            color: var(--text); background: #fff; outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(192,57,43,0.12);
+            background: #fffcfc;
+        }
+        .form-group input.valid,
+        .form-group select.valid,
+        .form-group textarea.valid {
+            border-color: #27ae60;
+            box-shadow: 0 0 0 3px rgba(39,174,96,0.1);
+        }
+        .form-group input.invalid,
+        .form-group select.invalid,
+        .form-group textarea.invalid {
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(192,57,43,0.15);
+            animation: shake 0.3s ease;
+        }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-group select {
+            cursor: pointer; appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23c0392b' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px;
+        }
+
+        /* Error messages */
+        .error-msg {
+            display: none; color: var(--red); font-size: 0.8rem;
+            margin-top: 5px; padding-left: 4px; font-weight: 500;
+        }
+        .error-msg.show { display: block; animation: fadeIn 0.2s ease; }
+
+        /* Radio & Checkbox */
+        .radio-group, .checkbox-group {
+            display: flex; flex-direction: column; gap: 10px; margin-top: 6px;
+        }
+        .radio-group label, .checkbox-group label {
+            display: flex; align-items: center; gap: 10px;
+            font-weight: 400; cursor: pointer; padding: 8px 12px;
+            border-radius: 6px; border: 2px solid transparent;
+            transition: all 0.2s ease; margin-bottom: 0;
+        }
+        .radio-group label:hover, .checkbox-group label:hover {
+            background: rgba(192,57,43,0.05); border-color: rgba(192,57,43,0.2);
+        }
+        .radio-group input[type="radio"],
+        .checkbox-group input[type="checkbox"] {
+            width: 18px; height: 18px; cursor: pointer;
+            accent-color: var(--red); flex-shrink: 0;
+        }
+        .radio-group input:checked + span,
+        .checkbox-group input:checked + span { color: var(--red); font-weight: 600; }
+
+        /* Form row */
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+        /* Star rating */
+        .star-rating { display: flex; gap: 6px; margin-top: 8px; }
+        .star-rating .star {
+            font-size: 2rem; cursor: pointer; color: #ddd;
+            transition: color 0.15s ease, transform 0.15s ease; user-select: none;
+        }
+        .star-rating .star:hover,
+        .star-rating .star.active { color: var(--gold); transform: scale(1.2); }
+
+        /* Char counter */
+        .char-counter { text-align: right; font-size: 0.78rem; color: #aaa; margin-top: 5px; }
+        .char-counter.near-limit { color: #e67e22; }
+        .char-counter.at-limit   { color: var(--red); font-weight: 700; }
+
+        /* Buttons */
+        .btn-submit {
+            background: linear-gradient(135deg, var(--red), var(--dark-red));
+            color: white; border: none; padding: 14px 38px;
+            border-radius: 8px; font-size: 1rem; font-weight: 700;
+            cursor: pointer; letter-spacing: 0.5px; font-family: inherit;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 15px rgba(192,57,43,0.35);
+            position: relative; overflow: hidden;
+        }
+        .btn-submit::before {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            width: 0; height: 0; background: rgba(255,255,255,0.2);
+            border-radius: 50%; transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+        }
+        .btn-submit:hover::before { width: 300px; height: 300px; }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(192,57,43,0.45); }
+        .btn-submit:active { transform: translateY(0); }
+        .btn-reset {
+            background: transparent; border: 2px solid var(--border);
+            color: #777; padding: 12px 28px; border-radius: 8px;
+            font-size: 0.95rem; cursor: pointer; margin-left: 12px;
+            transition: all 0.2s ease; font-family: inherit;
+        }
+        .btn-reset:hover { border-color: var(--red); color: var(--red); background: rgba(192,57,43,0.04); }
+
+        /* Section titles */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 28px 0;
+        }
+        .form-section-title {
+            font-size: 0.78rem; text-transform: uppercase; letter-spacing: 2px;
+            color: #aaa; font-weight: 700; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .form-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        /* Result panel */
+        #result-panel {
+            display: none;
+            background: linear-gradient(135deg, #fff8f0, #fff);
+            border: 2px solid var(--gold); border-radius: var(--radius);
+            padding: 32px; margin-top: 28px;
+            position: relative; overflow: hidden;
+            animation: slideDown 0.5s ease;
+        }
+        #result-panel::before {
+            content: '✓'; position: absolute; top: -15px; right: 20px;
+            font-size: 120px; color: var(--gold); opacity: 0.08; font-family: Georgia, serif;
+        }
+        #result-panel h3 {
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 18px;
+        }
+        .result-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+        .result-table tr td:first-child {
+            font-weight: 700; color: var(--red); width: 38%;
+            padding: 9px 14px; background: rgba(192,57,43,0.04); border-radius: 4px;
+        }
+        .result-table tr td:last-child { padding: 9px 14px; color: #444; }
+        .result-table tr { border-bottom: 1px solid #f0e6d6; }
+        .result-table tr:last-child { border-bottom: none; }
+
+        /* ── KEYFRAMES ── */
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            25%      { transform: translateX(-5px); }
+            75%      { transform: translateX(5px); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes cursorBlink {
+            0%,100% { border-color: rgba(255,255,255,0.7); }
+            50%      { border-color: transparent; }
+        }
+        @keyframes rippleAnim { to { transform: scale(2.5); opacity: 0; } }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1050px) {
+            .page-wrapper { grid-template-columns: 1fr; }
+            .table-of-contents { position: static; }
+            .contents-list { flex-direction: row; flex-wrap: wrap; }
+            .main-content { grid-template-columns: 1fr; }
+            .sidebar { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); }
+        }
+        @media (max-width: 640px) {
+            .header-content h1 { font-size: 2rem; }
+            nav ul li a { padding: 12px 14px; font-size: 0.85rem; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="header-content">
+            <h1 class="gradient-title">Țara China</h1>
+            <p>Civilizație milenară, putere economică modernă</p>
+        </div>
+    </div>
+</header>
+
+<nav>
+    <div class="container">
+        <ul>
+            <li><a href="index.html">Acasă</a></li>
+            <li><a href="pages/istorie.html">Istorie</a></li>
+            <li><a href="pages/cultura.html">Cultură</a></li>
+            <li><a href="pages/geografie.html">Geografie</a></li>
+            <li><a href="pages/economie.html">Economie</a></li>
+            <li><a href="formular.html" style="color:var(--gold)">Formular</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="page-wrapper">
+
+        <div class="table-of-contents">
+            <h3 class="gradient-title">Cuprins</h3>
+            <ul class="contents-list">
+                <li><a href="index.html">Acasă</a></li>
+                <li><a href="pages/istorie.html">Istorie</a></li>
+                <li><a href="pages/cultura.html">Cultură</a></li>
+                <li><a href="pages/geografie.html">Geografie</a></li>
+                <li><a href="pages/economie.html">Economie</a></li>
+                <li><a href="formular.html">Formular</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="content">
+
+                <div class="content-card">
+                    <h2 class="gradient-title">Formular de contact &amp; Chestionar</h2>
+                    <div class="fancy-text">
+                        <p>Completați formularul de mai jos pentru a ne trimite un mesaj sau pentru a participa la sondajul nostru despre China. Toate câmpurile marcate cu <span style="color:var(--red);-webkit-text-fill-color:var(--red)">*</span> sunt obligatorii.</p>
+                    </div>
+
+                    <!-- Progress bar -->
+                    <div class="form-progress">
+                        <div class="progress-label">
+                            <span>Progres completare</span>
+                            <span id="progress-percent">0%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                    </div>
+
+                    <form id="china-form" novalidate>
+
+                        <div class="form-section-title">Informații personale</div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="prenume">Prenume <span class="required">*</span></label>
+                                <input type="text" id="prenume" name="prenume" placeholder="ex: Ion"
+                                    autocomplete="given-name" data-required="true" data-min="2">
+                                <span class="error-msg" id="prenume-error">Prenumele trebuie să aibă minim 2 caractere.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="nume">Nume <span class="required">*</span></label>
+                                <input type="text" id="nume" name="nume" placeholder="ex: Popescu"
+                                    autocomplete="family-name" data-required="true" data-min="2">
+                                <span class="error-msg" id="nume-error">Numele trebuie să aibă minim 2 caractere.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Adresă email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="exemplu@email.com"
+                                autocomplete="email" data-required="true" data-type="email">
+                            <span class="error-msg" id="email-error">Introduceți o adresă de email validă.</span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="varsta">Vârstă <span class="required">*</span></label>
+                                <input type="number" id="varsta" name="varsta" placeholder="ex: 25"
+                                    min="10" max="99" data-required="true" data-min="10" data-max="99" data-type="number">
+                                <span class="error-msg" id="varsta-error">Vârsta trebuie să fie între 10 și 99 ani.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="tara">Țara de origine <span class="required">*</span></label>
+                                <select id="tara" name="tara" data-required="true">
+                                    <option value="">— Selectați —</option>
+                                    <option value="Romania">România</option>
+                                    <option value="Moldova">Moldova</option>
+                                    <option value="China">China</option>
+                                    <option value="Germania">Germania</option>
+                                    <option value="Franta">Franța</option>
+                                    <option value="Alta">Altă țară</option>
+                                </select>
+                                <span class="error-msg" id="tara-error">Selectați țara de origine.</span>
+                            </div>
+                        </div>
+
+                        <div class="section-divider"></div>
+                        <div class="form-section-title">Sondaj despre China</div>
+
+                        <div class="form-group">
+                            <label>Ce aspect al Chinei vă interesează cel mai mult? <span class="required">*</span></label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="interes" value="Istorie"> <span>Istoria și dinastiile</span></label>
+                                <label><input type="radio" name="interes" value="Cultura"> <span>Cultura și tradițiile</span></label>
+                                <label><input type="radio" name="interes" value="Economie"> <span>Economia și tehnologia</span></label>
+                                <label><input type="radio" name="interes" value="Geografie"> <span>Geografia și natura</span></label>
+                                <label><input type="radio" name="interes" value="Gastronomie"> <span>Gastronomia</span></label>
+                            </div>
+                            <span class="error-msg" id="interes-error">Selectați cel puțin o opțiune.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ați vizitat China? (sau intenționați să o vizitați) <span class="required">*</span></label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="vizita" value="Da, am vizitat"> <span>Da, am vizitat-o</span></label>
+                                <label><input type="radio" name="vizita" value="Nu, dar intentionez"> <span>Nu, dar intenționez</span></label>
+                                <label><input type="radio" name="vizita" value="Nu intentionez"> <span>Nu am în plan</span></label>
+                            </div>
+                            <span class="error-msg" id="vizita-error">Selectați o opțiune.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Surse de informare preferate (selectați toate aplicabile):</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="surse" value="Wikipedia"> <span>Wikipedia</span></label>
+                                <label><input type="checkbox" name="surse" value="Documentare"> <span>Documentare / filme</span></label>
+                                <label><input type="checkbox" name="surse" value="Carti"> <span>Cărți și reviste</span></label>
+                                <label><input type="checkbox" name="surse" value="Social Media"> <span>Social media</span></label>
+                                <label><input type="checkbox" name="surse" value="Calatorii"> <span>Călătorii personale</span></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Evaluați acest site despre China: <span class="required">*</span></label>
+                            <div class="star-rating" id="star-rating">
+                                <span class="star" data-val="1">★</span>
+                                <span class="star" data-val="2">★</span>
+                                <span class="star" data-val="3">★</span>
+                                <span class="star" data-val="4">★</span>
+                                <span class="star" data-val="5">★</span>
+                            </div>
+                            <input type="hidden" id="rating-value" name="rating" value="">
+                            <span class="error-msg" id="rating-error">Acordați o notă site-ului.</span>
+                        </div>
+
+                        <div class="section-divider"></div>
+                        <div class="form-section-title">Mesaj</div>
+
+                        <div class="form-group">
+                            <label for="subiect">Subiect <span class="required">*</span></label>
+                            <select id="subiect" name="subiect" data-required="true">
+                                <option value="">— Selectați subiectul —</option>
+                                <option value="Intrebare">Întrebare generală</option>
+                                <option value="Sugestie">Sugestie de îmbunătățire</option>
+                                <option value="Colaborare">Propunere de colaborare</option>
+                                <option value="Eroare">Raportare eroare</option>
+                                <option value="Altele">Altele</option>
+                            </select>
+                            <span class="error-msg" id="subiect-error">Selectați subiectul mesajului.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mesaj">Mesajul dvs. <span class="required">*</span></label>
+                            <textarea id="mesaj" name="mesaj"
+                                placeholder="Scrieți mesajul dumneavoastră aici..."
+                                maxlength="500" data-required="true" data-min="20"></textarea>
+                            <div class="char-counter" id="mesaj-counter">0 / 500 caractere</div>
+                            <span class="error-msg" id="mesaj-error">Mesajul trebuie să conțină minim 20 de caractere.</span>
+                        </div>
+
+                        <div style="margin-top:8px">
+                            <button type="submit" class="btn-submit">📨 Trimite mesajul</button>
+                            <button type="button" class="btn-reset" id="btn-reset">↺ Resetează</button>
+                        </div>
+
+                    </form>
+
+                    <div id="result-panel">
+                        <h3>✅ Formular trimis cu succes!</h3>
+                        <p style="color:#555;margin-bottom:16px">Iată un rezumat al informațiilor introduse:</p>
+                        <table class="result-table" id="result-table"></table>
+                        <div style="margin-top:20px">
+                            <button class="btn-submit" id="btn-new-form" style="font-size:0.9rem;padding:10px 24px">+ Completează din nou</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="sidebar sidebar-section">
+                <div class="content-card">
+                    <h3 class="gradient-title">Instrucțiuni</h3>
+                    <ul>
+                        <li>Completați câmpurile marcate cu <strong style="color:var(--red)">*</strong>.</li>
+                        <li>Email-ul trebuie să fie valid.</li>
+                        <li>Mesajul minim <strong>20 de caractere</strong>.</li>
+                        <li>Acordați o notă cu steluțele ★.</li>
+                        <li>Bara de progres indică gradul de completare.</li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <h3 class="gradient-title">Confidențialitate</h3>
+                    <p style="font-size:0.88rem">Datele introduse sunt folosite exclusiv în scop educațional și nu sunt transmise nicăieri.</p>
+                </div>
+                <div class="content-card">
+                    <h3 class="gradient-title">Link-uri utile</h3>
+                    <ul class="contents-list" style="flex-direction:column">
+                        <li><a href="index.html">← Înapoi la Acasă</a></li>
+                        <li><a href="pages/cultura.html">Cultură</a></li>
+                        <li><a href="pages/economie.html">Economie</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>Site creat pentru Lucrarea de laborator — Tehnologii Web</p>
+        <p>Tema: China | Pagina: Formular</p>
+    </div>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+//  FORM PROCESSING
+// ══════════════════════════════════════════════════════════════
+const form        = document.getElementById('china-form');
+const ratingInput = document.getElementById('rating-value');
+const stars       = document.querySelectorAll('.star');
+const counter     = document.getElementById('mesaj-counter');
+const mesaj       = document.getElementById('mesaj');
+
+// ── Star rating ───────────────────────────────────────────────
+stars.forEach(star => {
+    star.addEventListener('mouseenter', () => {
+        const val = +star.dataset.val;
+        stars.forEach(s => {
+            s.style.color     = +s.dataset.val <= val ? 'var(--gold)' : '#ddd';
+            s.style.transform = +s.dataset.val <= val ? 'scale(1.15)' : 'scale(1)';
+        });
+    });
+    star.addEventListener('mouseleave', () => {
+        const cur = +ratingInput.value || 0;
+        stars.forEach(s => {
+            s.style.color     = +s.dataset.val <= cur ? 'var(--gold)' : '#ddd';
+            s.style.transform = +s.dataset.val <= cur ? 'scale(1.1)'  : 'scale(1)';
+            s.classList.toggle('active', +s.dataset.val <= cur);
+        });
+    });
+    star.addEventListener('click', () => {
+        ratingInput.value = star.dataset.val;
+        stars.forEach(s => s.classList.toggle('active', +s.dataset.val <= +star.dataset.val));
+        document.getElementById('rating-error').classList.remove('show');
+        updateProgress();
+    });
+});
+
+// ── Character counter ─────────────────────────────────────────
+mesaj.addEventListener('input', () => {
+    const len = mesaj.value.length;
+    counter.textContent = `${len} / 500 caractere`;
+    counter.className   = 'char-counter' + (len >= 480 ? ' at-limit' : len >= 400 ? ' near-limit' : '');
+    updateProgress();
+});
+
+// ── Validation helpers ────────────────────────────────────────
+const isEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+function validateField(el) {
+    const val  = el.value.trim();
+    const id   = el.id;
+    const req  = el.dataset.required === 'true';
+    const type = el.dataset.type;
+    const min  = +el.dataset.min;
+    const max  = +el.dataset.max;
+    let ok = true;
+
+    if (req && !val)                          ok = false;
+    else if (type === 'email' && !isEmail(val)) ok = false;
+    else if (type === 'number') {
+        const n = +val; if (isNaN(n) || n < min || n > max) ok = false;
+    } else if (!type && min && val.length < min) ok = false;
+
+    el.classList.toggle('valid',   ok);
+    el.classList.toggle('invalid', !ok);
+    const err = document.getElementById(id + '-error');
+    if (err) err.classList.toggle('show', !ok);
+    return ok;
+}
+
+document.querySelectorAll('input[data-required], select[data-required], textarea[data-required]')
+    .forEach(el => {
+        el.addEventListener('blur',  () => { validateField(el); updateProgress(); });
+        el.addEventListener('input', () => { if (el.classList.contains('invalid')) validateField(el); updateProgress(); });
+    });
+
+document.querySelectorAll('input[type="radio"]').forEach(r => {
+    r.addEventListener('change', () => {
+        document.getElementById(r.name + '-error').classList.remove('show');
+        updateProgress();
+    });
+});
+
+// ── Progress bar ──────────────────────────────────────────────
+function updateProgress() {
+    const checks = [
+        () => document.getElementById('prenume').value.trim().length >= 2,
+        () => document.getElementById('nume').value.trim().length    >= 2,
+        () => isEmail(document.getElementById('email').value),
+        () => { const v = +document.getElementById('varsta').value; return !isNaN(v) && v >= 10 && v <= 99; },
+        () => document.getElementById('tara').value    !== '',
+        () => !!document.querySelector('input[name="interes"]:checked'),
+        () => !!document.querySelector('input[name="vizita"]:checked'),
+        () => ratingInput.value !== '',
+        () => document.getElementById('subiect').value !== '',
+        () => document.getElementById('mesaj').value.trim().length >= 20,
+    ];
+    const filled = checks.filter(fn => { try { return fn(); } catch(e) { return false; } }).length;
+    const pct = Math.round(filled / checks.length * 100);
+    document.getElementById('progress-fill').style.width        = pct + '%';
+    document.getElementById('progress-percent').textContent     = pct + '%';
+}
+
+// ── Submit ────────────────────────────────────────────────────
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    let valid = true;
+
+    form.querySelectorAll('[data-required]').forEach(el => { if (!validateField(el)) valid = false; });
+    if (!document.querySelector('input[name="interes"]:checked')) { document.getElementById('interes-error').classList.add('show'); valid = false; }
+    if (!document.querySelector('input[name="vizita"]:checked'))  { document.getElementById('vizita-error').classList.add('show');  valid = false; }
+    if (!ratingInput.value) { document.getElementById('rating-error').classList.add('show'); valid = false; }
+
+    if (!valid) { const f = form.querySelector('.invalid, .show'); if (f) f.scrollIntoView({ behavior:'smooth', block:'center' }); return; }
+
+    const surse = [...document.querySelectorAll('input[name="surse"]:checked')].map(c => c.value);
+    const rv    = +ratingInput.value;
+    const rows  = [
+        ['Prenume',          document.getElementById('prenume').value.trim()],
+        ['Nume',             document.getElementById('nume').value.trim()],
+        ['Email',            document.getElementById('email').value.trim()],
+        ['Vârstă',           document.getElementById('varsta').value + ' ani'],
+        ['Țara de origine',  document.getElementById('tara').value],
+        ['Interes principal',document.querySelector('input[name="interes"]:checked').value],
+        ['Vizitat China',    document.querySelector('input[name="vizita"]:checked').value],
+        ['Surse preferate',  surse.length ? surse.join(', ') : 'Niciuna selectată'],
+        ['Nota acordată',    '★'.repeat(rv)+'☆'.repeat(5-rv)+` (${rv}/5)`],
+        ['Subiect mesaj',    document.getElementById('subiect').value],
+        ['Mesaj',            document.getElementById('mesaj').value.trim()],
+    ];
+
+    document.getElementById('result-table').innerHTML = rows.map(([k,v]) => `<tr><td>${k}:</td><td>${v}</td></tr>`).join('');
+    form.style.display = 'none';
+    const panel = document.getElementById('result-panel');
+    panel.style.display = 'block';
+    panel.scrollIntoView({ behavior:'smooth', block:'start' });
+});
+
+// ── Reset ─────────────────────────────────────────────────────
+function resetForm() {
+    form.reset();
+    ratingInput.value = '';
+    stars.forEach(s => { s.classList.remove('active'); s.style.color='#ddd'; s.style.transform='scale(1)'; });
+    form.querySelectorAll('.valid,.invalid').forEach(el => el.classList.remove('valid','invalid'));
+    form.querySelectorAll('.error-msg').forEach(el => el.classList.remove('show'));
+    counter.textContent = '0 / 500 caractere';
+    counter.className   = 'char-counter';
+    updateProgress();
+}
+document.getElementById('btn-reset').addEventListener('click', resetForm);
+document.getElementById('btn-new-form').addEventListener('click', () => {
+    document.getElementById('result-panel').style.display = 'none';
+    form.style.display = 'block';
+    resetForm();
+    form.scrollIntoView({ behavior:'smooth', block:'start' });
+});
+
+updateProgress();
+
+// ══════════════════════════════════════════════════════════════
+//  VISUAL EFFECTS
+// ══════════════════════════════════════════════════════════════
+(function () {
+
+    // 1. Particule în header
+    const hdr    = document.querySelector('header');
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;';
+    hdr.appendChild(canvas);
+    const ctx   = canvas.getContext('2d');
+    const CHARS = ['龙','中','国','华','明','福','寿','春','★','✦'];
+    let pts = [];
+    const resize = () => { canvas.width = hdr.offsetWidth; canvas.height = hdr.offsetHeight; };
+    resize(); window.addEventListener('resize', resize);
+    const mkPt = () => ({ x: Math.random()*canvas.width, y: canvas.height+20,
+        char: CHARS[Math.floor(Math.random()*CHARS.length)],
+        size: 10+Math.random()*18, speed: 0.3+Math.random()*0.6,
+        opacity: 0.06+Math.random()*0.1, drift: (Math.random()-0.5)*0.4,
+        rot: Math.random()*Math.PI*2, rs: (Math.random()-0.5)*0.02 });
+    for(let i=0;i<14;i++){ const p=mkPt(); p.y=Math.random()*canvas.height; pts.push(p); }
+    (function anim() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        pts.forEach((p,i) => {
+            ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+            ctx.globalAlpha=p.opacity; ctx.fillStyle='#f5d06e';
+            ctx.font=`${p.size}px serif`; ctx.fillText(p.char,0,0); ctx.restore();
+            p.y-=p.speed; p.x+=p.drift; p.rot+=p.rs;
+            if(p.y<-30) pts[i]=mkPt();
+        });
+        requestAnimationFrame(anim);
+    })();
+
+    // 2. Scroll reveal carduri
+    document.querySelectorAll('.content-card').forEach((c,i) => {
+        c.style.opacity   = '0';
+        c.style.transform = 'translateY(30px)';
+        c.style.transition = `opacity 0.6s ease ${i*0.08}s, transform 0.6s ease ${i*0.08}s`;
+        new IntersectionObserver(([e]) => {
+            if(e.isIntersecting){ c.style.opacity='1'; c.style.transform='translateY(0)'; }
+        }, { threshold:0.1 }).observe(c);
+    });
+
+    // 3. Typing effect subtitlu
+    const sub = document.querySelector('.header-content p');
+    if(sub) {
+        const txts = ['Civilizație milenară, putere economică modernă','Peste 5.000 de ani de istorie și cultură','Cel mai populat stat din lume'];
+        let ti=0, ci=0, del=false;
+        sub.style.borderRight  = '2px solid rgba(255,255,255,0.7)';
+        sub.style.paddingRight = '4px';
+        sub.style.animation    = 'cursorBlink 0.7s step-end infinite';
+        const type = () => {
+            const t = txts[ti];
+            sub.textContent = del ? t.substring(0,ci-1) : t.substring(0,ci+1);
+            del ? ci-- : ci++;
+            if(!del && ci===t.length){ del=true; setTimeout(type,2200); return; }
+            if(del && ci===0){ del=false; ti=(ti+1)%txts.length; }
+            setTimeout(type, del?30:60);
+        };
+        setTimeout(type, 1200);
+    }
+
+    // 4. Nav active highlight
+    const cur = window.location.pathname.split('/').pop()||'index.html';
+    document.querySelectorAll('nav ul li a').forEach(l => {
+        if(l.getAttribute('href').split('/').pop()===cur)
+            l.style.cssText += 'color:var(--gold)!important;background:rgba(243,156,18,0.15);border-bottom:3px solid var(--gold);';
+    });
+
+    // 5. Ripple nav
+    document.querySelectorAll('nav ul li a').forEach(l => {
+        l.addEventListener('click', function(e) {
+            const r=document.createElement('span'), rect=this.getBoundingClientRect(), sz=Math.max(rect.width,rect.height);
+            r.style.cssText=`position:absolute;border-radius:50%;width:${sz}px;height:${sz}px;background:rgba(243,156,18,0.35);left:${e.clientX-rect.left-sz/2}px;top:${e.clientY-rect.top-sz/2}px;transform:scale(0);animation:rippleAnim 0.5s linear;pointer-events:none;`;
+            this.style.overflow='hidden'; this.appendChild(r); setTimeout(()=>r.remove(),500);
+        });
+    });
+
+    // 6. Back to top
+    const btn = document.createElement('button');
+    btn.innerHTML='▲'; btn.title='Sus';
+    btn.style.cssText='position:fixed;bottom:28px;right:28px;background:linear-gradient(135deg,#c0392b,#922b21);color:white;border:none;width:44px;height:44px;border-radius:50%;font-size:1rem;cursor:pointer;box-shadow:0 4px 15px rgba(192,57,43,0.4);opacity:0;transform:translateY(20px);transition:opacity 0.3s,transform 0.3s;z-index:9999;pointer-events:none;';
+    document.body.appendChild(btn);
+    window.addEventListener('scroll', () => {
+        const show = window.scrollY>300;
+        btn.style.opacity       = show?'1':'0';
+        btn.style.transform     = show?'translateY(0)':'translateY(20px)';
+        btn.style.pointerEvents = show?'auto':'none';
+    });
+    btn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+    // 7. Page fade in
+    document.body.style.opacity    = '0';
+    document.body.style.transition = 'opacity 0.5s ease';
+    window.addEventListener('load', () => setTimeout(()=>{ document.body.style.opacity='1'; },80));
+    setTimeout(()=>{ document.body.style.opacity='1'; }, 600);
+
+})();
+</script>
+</body>
+</html>
